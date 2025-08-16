@@ -1,0 +1,57 @@
+
+  :root{
+    --bg1:#fff7fb; --bg2:#fff2ea; --accent:#ff4d6d; --rose:#ff8ab8; --gold:#ffd166;
+    --card:#ffffffdd;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(140deg,var(--bg1),var(--bg2));color:#222}
+  .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{width:min(920px,96vw);background:var(--card);border-radius:18px;padding:18px;box-shadow:0 12px 40px rgba(0,0,0,.08);position:relative;overflow:hidden}
+  header{display:flex;align-items:center;gap:14px;padding-bottom:6px}
+  .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--rose),var(--accent));color:#fff;font-weight:800;font-size:22px}
+  h1{margin:0;font-size:clamp(18px,3.6vw,26px)}
+  p.lead{margin:4px 0 0;opacity:.95;font-size:14px}
+
+  /* Scene */
+  .scene{margin-top:12px;display:grid;place-items:center}
+  .stage{width:100%;max-width:640px;background:#fff;border-radius:14px;padding:14px;position:relative;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.06)}
+  .topArea{display:flex;justify-content:space-between;align-items:center}
+  .btn{appearance:none;border:0;border-radius:999px;background:var(--accent);color:#fff;padding:10px 14px;font-weight:800;cursor:pointer;box-shadow:0 10px 24px rgba(255,77,109,.22)}
+  .btn.secondary{background:#6c757d}
+
+  /* Cake */
+  .cake-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:10px}
+  .cake{width:260px;height:200px;position:relative}
+  .layer{position:absolute;left:50%;transform:translateX(-50%);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.06)}
+  .layer.bottom{width:240px;height:84px;background:linear-gradient(180deg,#ffeef0,#ffdede);bottom:8px}
+  .layer.mid{width:210px;height:62px;background:linear-gradient(180deg,#fff1f6,#ffd8e6);bottom:64px}
+  .layer.top{width:180px;height:46px;background:linear-gradient(180deg,#fff7f9,#ffe6f3);bottom:106px}
+  .frost{position:absolute;left:50%;transform:translateX(-50%);bottom:138px;width:160px;height:24px;background:linear-gradient(90deg,#fff,#ffe7f0);border-radius:12px}
+  .candles{position:absolute;left:50%;transform:translateX(-50%);bottom:146px;display:flex;gap:12px}
+  .candle{width:8px;height:44px;background:linear-gradient(180deg,#fff,#ffe6f0);border-radius:4px;position:relative;display:flex;align-items:flex-start;justify-content:center}
+  .wick{width:2px;height:6px;background:#333;margin-top:4px;border-radius:1px}
+  .flame{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:12px;height:18px;border-radius:60% 60% 50% 50%;filter:blur(.2px)}
+  .flameInner{width:6px;height:8px;border-radius:50%;position:absolute;left:50%;transform:translateX(-50%);top:3px}
+
+  /* blinking */
+  .blink{animation:blink 1s linear infinite}
+  @keyframes blink{0%,100%{opacity:1;filter:brightness(1)}50%{opacity:0.25;filter:brightness(.5)}}
+
+  /* Photos layout */
+  .photos{display:flex;gap:12px;justify-content:center;align-items:center;padding:12px;flex-wrap:wrap}
+  .photo{width:45%;min-width:140px;border-radius:12px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.08);transform-origin:center center}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1);transition:transform 8s ease}
+  .photo.show img{transform:scale(1.12)}
+
+  /* Note */
+  .note{margin-top:12px;padding:14px;border-radius:12px;background:linear-gradient(180deg,#fff,#fff8f7);box-shadow:0 8px 20px rgba(0,0,0,.04);font-size:15px;line-height:1.6;color:#333;opacity:0;transform:translateY(10px);transition:all .8s cubic-bezier(.2,.9,.2,1)}
+  .note.show{opacity:1;transform:translateY(0)}
+
+  /* floating hearts (absolute) */
+  .hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .heart{position:absolute;width:28px;height:28px;background:linear-gradient(45deg,#ff6b6b,#ff9ab8);transform:rotate(-45deg);border-radius:10px;opacity:.95}
+  .heart::before,.heart::after{content:'';position:absolute;background:inherit;border-radius:50%;width:60%;height:60%}
+  .heart::before{top:-30%;left:0} .heart::after{right:-30%;top:0}
+
+  footer{margin-top:12px;text-align:center;font-size:12px;color:#666;opacity:.9}
+  @media (max-width:420px){ .cake{width:200px;height:160px} .layer.bottom{width:200px;height:70px} .layer.mid{width:175px;height:54px} .layer.top{width:150px;height:40px} .frost{width:130px} .candles{gap:8px;bottom:128px} .photo{width:90%} }
