@@ -4,10 +4,66 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Happy Birthday Amna 🎂</title>
- <link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --bg1:#fff7fb; --bg2:#fff2ea; --accent:#ff4d6d; --rose:#ff8ab8; --gold:#ffd166;
+    --card:#ffffffdd;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(140deg,var(--bg1),var(--bg2));color:#222}
+  .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{width:min(920px,96vw);background:var(--card);border-radius:18px;padding:18px;box-shadow:0 12px 40px rgba(0,0,0,.08);position:relative;overflow:hidden}
+  header{display:flex;align-items:center;gap:14px;padding-bottom:6px}
+  .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--rose),var(--accent));color:#fff;font-weight:800;font-size:22px}
+  h1{margin:0;font-size:clamp(18px,3.6vw,26px)}
+  p.lead{margin:4px 0 0;opacity:.95;font-size:14px}
+
+  /* Scene */
+  .scene{margin-top:12px;display:grid;place-items:center}
+  .stage{width:100%;max-width:640px;background:#fff;border-radius:14px;padding:14px;position:relative;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.06)}
+  .topArea{display:flex;justify-content:space-between;align-items:center}
+  .btn{appearance:none;border:0;border-radius:999px;background:var(--accent);color:#fff;padding:10px 14px;font-weight:800;cursor:pointer;box-shadow:0 10px 24px rgba(255,77,109,.22)}
+  .btn.secondary{background:#6c757d}
+
+  /* Cake */
+  .cake-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:10px}
+  .cake{width:260px;height:200px;position:relative}
+  .layer{position:absolute;left:50%;transform:translateX(-50%);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.06)}
+  .layer.bottom{width:240px;height:84px;background:linear-gradient(180deg,#ffeef0,#ffdede);bottom:8px}
+  .layer.mid{width:210px;height:62px;background:linear-gradient(180deg,#fff1f6,#ffd8e6);bottom:64px}
+  .layer.top{width:180px;height:46px;background:linear-gradient(180deg,#fff7f9,#ffe6f3);bottom:106px}
+  .frost{position:absolute;left:50%;transform:translateX(-50%);bottom:138px;width:160px;height:24px;background:linear-gradient(90deg,#fff,#ffe7f0);border-radius:12px}
+  .candles{position:absolute;left:50%;transform:translateX(-50%);bottom:146px;display:flex;gap:12px}
+  .candle{width:8px;height:44px;background:linear-gradient(180deg,#fff,#ffe6f0);border-radius:4px;position:relative;display:flex;align-items:flex-start;justify-content:center}
+  .wick{width:2px;height:6px;background:#333;margin-top:4px;border-radius:1px}
+  .flame{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:12px;height:18px;border-radius:60% 60% 50% 50%;filter:blur(.2px)}
+  .flameInner{width:6px;height:8px;border-radius:50%;position:absolute;left:50%;transform:translateX(-50%);top:3px}
+
+  /* blinking */
+  .blink{animation:blink 1s linear infinite}
+  @keyframes blink{0%,100%{opacity:1;filter:brightness(1)}50%{opacity:0.25;filter:brightness(.5)}}
+
+  /* Photos layout */
+  .photos{display:flex;gap:12px;justify-content:center;align-items:center;padding:12px;flex-wrap:wrap}
+  .photo{width:45%;min-width:140px;border-radius:12px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.08);transform-origin:center center}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1);transition:transform 8s ease}
+  .photo.show img{transform:scale(1.12)}
+
+  /* Note */
+  .note{margin-top:12px;padding:14px;border-radius:12px;background:linear-gradient(180deg,#fff,#fff8f7);box-shadow:0 8px 20px rgba(0,0,0,.04);font-size:15px;line-height:1.6;color:#333;opacity:0;transform:translateY(10px);transition:all .8s cubic-bezier(.2,.9,.2,1)}
+  .note.show{opacity:1;transform:translateY(0)}
+
+  /* floating hearts (absolute) */
+  .hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .heart{position:absolute;width:28px;height:28px;background:linear-gradient(45deg,#ff6b6b,#ff9ab8);transform:rotate(-45deg);border-radius:10px;opacity:.95}
+  .heart::before,.heart::after{content:'';position:absolute;background:inherit;border-radius:50%;width:60%;height:60%}
+  .heart::before{top:-30%;left:0} .heart::after{right:-30%;top:0}
+
+  footer{margin-top:12px;text-align:center;font-size:12px;color:#666;opacity:.9}
+  @media (max-width:420px){ .cake{width:200px;height:160px} .layer.bottom{width:200px;height:70px} .layer.mid{width:175px;height:54px} .layer.top{width:150px;height:40px} .frost{width:130px} .candles{gap:8px;bottom:128px} .photo{width:90%} }
+</style>
 </head>
 <body>
-  <script src="script.js"></script>
 <div class="wrap">
   <div class="card" role="main" aria-label="Birthday for Amna">
     <header>
@@ -50,13 +106,12 @@
         <!-- photos + note (hidden until click) -->
         <div id="contentArea" style="padding:12px;display:none">
           <div class="photos" id="photos">
-  
+ 
             <div class="photo" id="p2"><img src="WhatsApp Image 2025-08-16 at 9.02.42 PM.jpeg" alt="photo2"></div>
           </div>
 
           <div class="note" id="note">
-            💖 Happy Birthday, my dear friend! 🎉💖 On this special day, I just want you to know how grateful I am to have you in my life. You’re not just a friend, you’re family to me — someone who makes my days brighter, my laughs louder, and my heart fuller. May this year bring you endless happiness, countless blessings, and all the love you truly deserve. Keep shining, keep smiling, and never forget how special you are to everyone around you. Wishing you the best birthday ever! 🥳💐🎂
-            <strong>Happy Birthday buddy ❤️</strong>
+            💖 Happy Birthday, my dear friend! 🎉💖 On this special day, I just want you to know how grateful I am to have you in my life. You’re not just a friend, you’re family to me — someone who makes my days brighter, my laughs louder, and my heart fuller. May this year bring you endless happiness, countless blessings, and all the love you truly deserve. Keep shining, keep smiling, and never forget how special you are to everyone around you. Wishing you the best birthday ever! 🥳💐🎂 ❤️</strong>
           </div>
         </div>
 
@@ -67,6 +122,99 @@
   </div>
 </div>
 
+<script>
+/* Helper: spawn floating hearts */
+function spawnHeart() {
+  const hearts = document.getElementById('hearts');
+  const h = document.createElement('div');
+  h.className = 'heart';
+  const left = 8 + Math.random() * 84;
+  h.style.left = left + '%';
+  const size = 16 + Math.random() * 26;
+  h.style.width = size + 'px'; h.style.height = size + 'px';
+  const dur = 4 + Math.random() * 4;
+  h.style.animation = `floatUp ${dur}s linear forwards`;
+  hearts.appendChild(h);
+  setTimeout(()=> { h.remove(); }, (dur+0.6)*1000);
+}
 
+/* Confetti burst function (small colored squares) */
+function addConfetti(n=120) {
+  const stage = document.getElementById('stage');
+  const c = document.createElement('canvas');
+  c.style.position = 'absolute'; c.style.inset = '0'; c.style.pointerEvents = 'none';
+  stage.appendChild(c);
+  const ctx = c.getContext('2d');
+  function resize(){ c.width = stage.clientWidth; c.height = stage.clientHeight; }
+  resize(); window.addEventListener('resize', resize);
+  const pieces = [];
+  for(let i=0;i<n;i++){ pieces.push({x:Math.random()*c.width,y:-Math.random()*c.height,s:4+Math.random()*8,v:1+Math.random()*3,a:Math.random()*Math.PI,c:`hsl(${Math.random()*360},80%,60%)`}); }
+  let raf;
+  function loop(){
+    ctx.clearRect(0,0,c.width,c.height);
+    for(let i=pieces.length-1;i>=0;i--){
+      const p = pieces[i]; p.y+=p.v; p.a+=0.03;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s); ctx.restore();
+      if(p.y>c.height+30) pieces.splice(i,1);
+    }
+    if(pieces.length) raf = requestAnimationFrame(loop); else { cancelAnimationFrame(raf); setTimeout(()=> c.remove(),400); }
+  }
+  loop();
+}
+
+/* Small WebAudio melody (soft) */
+let audioCtx, masterGain;
+function initAudio(){ if(audioCtx) return; audioCtx = new (window.AudioContext || window.webkitAudioContext)(); masterGain = audioCtx.createGain(); masterGain.gain.value = 0.9; masterGain.connect(audioCtx.destination); }
+function playNote(freq, t, dur){ const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.type='sine'; o.frequency.value=freq; o.connect(g); g.connect(masterGain); g.gain.setValueAtTime(0.001, t); g.gain.exponentialRampToValueAtTime(0.35, t+0.01); g.gain.exponentialRampToValueAtTime(0.0001, t+dur); o.start(t); o.stop(t+dur+0.02); }
+function playMelody(){
+  initAudio();
+  const now = audioCtx.currentTime;
+  const beat = 0.34;
+  const notes = [392,392,440,392,523,494, 392,392,440,392,587,523];
+  let t = now;
+  for(let i=0;i<notes.length;i++){ playNote(notes[i], t, beat*0.9); t += beat; }
+}
+
+/* Sequence logic */
+const clickHere = document.getElementById('clickHere');
+const candles = document.querySelectorAll('.flame');
+const p1 = document.getElementById('p1'), p2 = document.getElementById('p2');
+const contentArea = document.getElementById('contentArea');
+const note = document.getElementById('note');
+
+clickHere.addEventListener('click', async () => {
+  // Start audio on user interaction (required by mobile browsers)
+  try { playMelody(); } catch(e){ initAudio(); playMelody(); }
+  // Light candles (already blinking). Show small hearts & confetti.
+  for(let i=0;i<6;i++){ setTimeout(spawnHeart, i*300); }
+  addConfetti(120);
+  clickHere.disabled = true; clickHere.textContent = 'Lighting...';
+
+  // After short time, extinguish (simulate blow) and reveal photos
+  setTimeout(()=> {
+    // extinguish flames with stagger
+    candles.forEach((f,i)=> setTimeout(()=> { f.style.transition='opacity .9s'; f.style.opacity = '0'; f.classList.remove('blink'); }, i*120));
+    // small 'blow' audio (low notes)
+    if(audioCtx){ const now = audioCtx.currentTime; playNote(220, now, 0.12); playNote(180, now+0.08, 0.12); playNote(160, now+0.16, 0.12); }
+    addConfetti(260);
+  }, 2300);
+
+  // After flames out, reveal content area with smooth transitions
+  setTimeout(()=> {
+    contentArea.style.display = 'block';
+    // start ken-burns effect by adding .show class to photos
+    setTimeout(()=> { p1.classList.add('show'); p2.classList.add('show'); }, 80);
+    // reveal note
+    setTimeout(()=> { note.classList.add('show'); }, 1200);
+    clickHere.textContent = 'Enjoy 🎉';
+  }, 3200);
+});
+
+/* optional keyboard shortcuts */
+document.addEventListener('keydown', e=>{ if(e.key==='r') addConfetti(160); if(e.key==='Enter') clickHere.click(); });
+
+/* initial tiny hearts for vibe */
+for(let i=0;i<5;i++){ setTimeout(spawnHeart, i*400); }
+</script>
 </body>
 </html>
